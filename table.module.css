@@ -1,3 +1,8 @@
+1))))) src/components/table ---> table.module.css
+
+
+
+
 .table {
     margin: 10px;
     border-radius: 10px;
@@ -144,3 +149,81 @@ box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.16);
     background-color: #ECDE7C;
     border-radius: 10px; 
 }
+
+
+
+2))))) src/components/table ---> index.js
+
+
+import React, { useState } from "react";
+import { Input } from "antd";
+import styles from "./table.module.css";
+import { CreateButton } from "../Buttons";
+import { SearchOutlined } from "@ant-design/icons";
+import classNames from "classnames";
+import { ReactComponent as ReactFolder } from "./../../folder.svg";
+import { ReactComponent as LineComponent } from "./../../line.svg";
+
+
+
+export const Table = ({ rows = [], onCreate, onClickTitle }) => {
+  const [search, setSearch] = useState("");
+
+  return (
+    <div className={styles.table}>
+      <div>
+      </div>
+      <div>
+        <div className={styles.buttons}>
+
+        </div>
+        <div className={styles.styledDiv}>
+        <div className={styles.tableInput} style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className={styles.buttonContainer}>
+          <CreateButton onClick={onCreate} type="create" label="Create Category" />
+        </div>
+        <div className={styles.tt}> 
+        <div className={styles.buttons}></div>
+        <Input type="text" placeholder="Add a title" />
+        <LineComponent/>
+        <div className={styles.ss}>
+     
+        <Input type="text" placeholder="Write your note here..." />
+        </div></div>
+        </div>
+          {/* {} */}
+          <p>test test</p>
+        </div>
+      </div>
+      <div className={styles.otherdiv} style={{display:'flex', justifyContent: 'space-between'}}>
+      </div>
+      {rows
+        .filter((row) => row.name.startsWith(search))
+        .map((row, index) => {
+          return (
+            <div key={index} className={styles.row}>
+              <p
+                style={{ minWidth: "300px", textAlign: "center" }}
+                onClick={() => onClickTitle(row)}
+              >
+                {row.name}
+              </p>
+              <div>
+                {row.status}
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
+
+export default Table;
+
+
+
+       3))) JASHTA TABLE --> index.js
+
+       export * from './Header'
+export * from './Table'
+export * from './Modals'
